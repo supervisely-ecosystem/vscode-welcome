@@ -6,7 +6,7 @@ psutil==5.9.0
 python-dotenv==0.19.2
 supervisely==6.7.1
 jsonpatch==1.32
-
+black
 
 # delme
 names
