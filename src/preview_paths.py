@@ -1,5 +1,7 @@
 import os
 from haikunator import Haikunator
+import supervisely as sly
+
 
 _vscode = "vscode"
 _agent_name = os.environ["AGENT_NAME"]
@@ -19,3 +21,14 @@ def preview_team_files_path(name):
 
 def generate_project_name():
     return _default_name + _haikunator.haikunate(token_length=0)
+
+
+def init(state: dict, data: dict):
+    name = generate_project_name()
+    state["name"] = name
+    update_paths(name, data)
+
+
+def update_paths(name: str, data: dict):
+    data["localPath"] = preview_local_path(name)
+    data["teamFilesPath"] = preview_team_files_path(name)

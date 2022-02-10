@@ -4,11 +4,16 @@
     title="Application name"
     description="This name will be used to create folders structure and github repo (optional)"
   >
-    <el-input
-      placeholder="Please input name"
-      v-model="state.name"
-      @change="post('/generate-local-path')"
-    ></el-input>
+    <div class="fflex">
+      <el-input
+        placeholder="Please input name"
+        v-model="state.name"
+        @change="post('/name-changed')"
+      ></el-input>
+      <el-button class="ml10" @click="post('/generate')">
+        <i class="zmdi zmdi-rotate-left mr5"></i> Generate
+      </el-button>
+    </div>
   </sly-field>
 
   <sly-field

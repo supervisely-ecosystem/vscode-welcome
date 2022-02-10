@@ -17,28 +17,16 @@ print(f"App root directory: {app_repo_dir}")
 load_dotenv(os.path.join(app_repo_dir, "secret.env"))
 load_dotenv(os.path.join(app_repo_dir, "debug.env"))
 
-from src.preview_paths import (
-    preview_local_path,
-    preview_team_files_path,
-    generate_project_name,
-)
+import src.preview_paths as step1
 
-
-name = generate_project_name()
+from src.preview_paths import init, update_paths
 
 # init global state and data (singletons)
-sly.app.LastStateJson(
-    {
-        "name": name,
-        "activeStep": 1,
-    }
-)
-sly.app.DataJson(
-    {
-        "localPath": preview_local_path(name),
-        "teamFilesPath": preview_team_files_path(name),
-    }
-)
+sly.app.LastStateJson({"activeStep": 1})
+sly.app.DataJson({})
+init(sly.app.LastStateJson(), sly.app.DataJson())
+
+print(sly.app.LastStateJson())
 
 app = FastAPI()
 sly_app = sly.app.fastapi.create()
@@ -53,17 +41,20 @@ async def read_index(request: Request):
 
 
 @app.post("/generate")
-async def generate(request: Request):
+async def generate(
+    request: Request, state: sly.app.StateJson = Depends(sly.app.StateJson.from_request)
+):
+    print(sly.app.LastStateJson())
     data = sly.app.DataJson()
-    data["name"] = names.get_first_name()
+    init(state, data)
+    await state.synchronize_changes()
     await data.synchronize_changes()
 
 
-@app.post("/generate-local-path")
-async def generate_local_path(
+@app.post("/name-changed")
+async def name_changed(
     request: Request, state: sly.app.StateJson = Depends(sly.app.StateJson.from_request)
 ):
-    state["localPath"] = os.path.join(
-        os.getenv("SUPERVISELY_AGENT_FILES"), "vscode", state["name"]
-    )
-    await state.synchronize_changes()
+    data = sly.app.DataJson()
+    update_paths(state["name"], data)
+    await data.synchronize_changes()
