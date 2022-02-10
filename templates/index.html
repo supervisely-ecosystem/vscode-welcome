@@ -1,27 +1,18 @@
 <!DOCTYPE html>
 <html>
   <body>
-    <!-- @TODO: single script import -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.15.7/theme-chalk/index.min.css"
       rel="stylesheet"
+      href="https://supervise.ly/apps-designer.bundle.css"
     />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.15.7/index.min.js"></script>
+    <script src="https://supervise.ly/apps-designer.bundle.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fast-json-patch@3.1.0/dist/fast-json-patch.min.js"></script>
     <script src="https://supervisely-ecosystem.github.io/supervisely-app-frontend-js/SlyApp.js"></script>
 
     <div id="sly-app">
       <sly-app>
         <template v-slot="{ post, state, data }">
-          <sly-field title="Some field" description="Field description">
-            <div>Some content</div>
-          </sly-field>
-
-          <div>Hello random user: {{ data.name }}</div>
-          <el-button type="primary" @click="post('/generate')">
-            Get name (post response)</el-button
-          >
+          {% include 'app.html' %}
         </template>
       </sly-app>
     </div>
