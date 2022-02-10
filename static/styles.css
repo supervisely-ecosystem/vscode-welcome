@@ -1,11 +1,14 @@
-.short {
-  max-width: 500px;
-}
-
-.short-text {
+.ellipsis-text {
   display: inline-block;
-  width: 500px;
+  width: 100%;
   white-space: nowrap;
   overflow: hidden !important;
   text-overflow: ellipsis;
+}
+
+.path {
+  background: rgb(241, 243, 244);
+  border-radius: 5px;
+  padding: 10px;
+  display: block;
 }

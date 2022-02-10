@@ -1,44 +1,40 @@
 <link href="/static/styles.css" rel="stylesheet" />
-
-<sly-field
-  class="short"
-  title="Application name"
-  description="This name will be used to create folders structure and github repo (optional)"
->
-  <el-input
-    placeholder="Please input name"
-    v-model="state.name"
-    @change="post('/generate-local-path')"
-  ></el-input>
-</sly-field>
-
-<sly-field
-  class="short"
-  title="Path on server"
-  description="All project files including source code will be located at the following directory on the computer with current Agent"
->
-  <el-tooltip
-    class="item"
-    effect="dark"
-    :content="state.localPath"
-    placement="top-start"
+<sly-card title="General settings" subtitle="define name and preview paths">
+  <sly-field
+    title="Application name"
+    description="This name will be used to create folders structure and github repo (optional)"
   >
-    <pre class="short-text"><code>{{state.localPath}}</code></pre>
-  </el-tooltip>
-</sly-field>
+    <el-input
+      placeholder="Please input name"
+      v-model="state.name"
+      @change="post('/generate-local-path')"
+    ></el-input>
+  </sly-field>
 
-<sly-field
-  class="short"
-  title="Path in Team Files"
-  description="This name will be used to create folders structure and github repo (optional)"
->
-  <el-input
-    class="form"
-    placeholder="Please input name"
-    v-model="state.name"
-  ></el-input>
-</sly-field>
+  <sly-field
+    title="Path on server"
+    description="All project files including source code will be located at the following directory on the computer with current Agent"
+  >
+    <el-tooltip :content="data.localPath">
+      <!-- short  -->
+      <code class="path">
+        <div class="ellipsis-text">{{data.localPath}}</div>
+      </code>
+    </el-tooltip>
+  </sly-field>
 
-<el-button type="primary" @click="post('/generate')">
-  Get name (post response)
-</el-button>
+  <sly-field
+    title="Path in team files"
+    description="This name will be used to create folders structure and github repo (optional)"
+  >
+    <el-tooltip :content="data.teamFilesPath">
+      <code class="path">
+        <div class="ellipsis-text">{{data.teamFilesPath}}</div>
+      </code>
+    </el-tooltip>
+  </sly-field>
+
+  <!-- <el-button type="primary" @click="post('/generate')">
+    Get name (post response)
+  </el-button> -->
+</sly-card>

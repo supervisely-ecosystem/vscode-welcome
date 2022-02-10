@@ -6,19 +6,22 @@ from fastapi.staticfiles import StaticFiles
 import supervisely as sly
 import names
 
-from preview_paths import (
-    preview_local_path,
-    preview_team_files_path,
-    generate_project_name,
-)
-
 app_repo_dir = os.getcwd()  # app root directory (working directory)
 sys.path.append(app_repo_dir)
+sys.path.append(os.path.join(app_repo_dir, "src"))
 print(f"App root directory: {app_repo_dir}")
+
+# @TODO: repo visibility
 
 # order matters
 load_dotenv(os.path.join(app_repo_dir, "secret.env"))
 load_dotenv(os.path.join(app_repo_dir, "debug.env"))
+
+from src.preview_paths import (
+    preview_local_path,
+    preview_team_files_path,
+    generate_project_name,
+)
 
 
 name = generate_project_name()
@@ -27,6 +30,7 @@ name = generate_project_name()
 sly.app.LastStateJson(
     {
         "name": name,
+        "activeStep": 1,
     }
 )
 sly.app.DataJson(
