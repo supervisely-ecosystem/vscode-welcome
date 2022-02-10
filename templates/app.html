@@ -1,10 +1,16 @@
-<sly-field title="Some field" description="Field description">
-  <div>Some content</div>
+<link href="/static/styles.css" rel="stylesheet" />
+
+<sly-field
+  title="Application name"
+  description="This name will be used to create folders structure and github repo (optional)"
+>
+  <el-input
+    class="form"
+    placeholder="Please input name"
+    v-model="state.name"
+  ></el-input>
 </sly-field>
 
-<div>Hello random user: {{ data.name }}</div>
 <el-button type="primary" @click="post('/generate')">
-  Get name (post response)</el-button
->
-<div>1233333</div>
-<pre>{{data}}</pre>
+  Get name (post response)
+</el-button>

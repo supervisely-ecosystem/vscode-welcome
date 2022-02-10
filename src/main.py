@@ -1,16 +1,17 @@
 from fastapi import FastAPI, Request
+from fastapi.staticfiles import StaticFiles
 import supervisely as sly
 import names
 
 
-# init state and data (singletons)
-sly.app.LastStateJson({})
-sly.app.DataJson({"name": "<empty>"})
-
+# init global state and data (singletons)
+sly.app.LastStateJson({"name": ""})
+sly.app.DataJson({})
 
 app = FastAPI()
 sly_app = sly.app.fastapi.create()
 app.mount("/sly", sly_app)
+app.mount("/static", StaticFiles(directory="static", html=True), name="static")
 templates = sly.app.fastapi.Jinja2Templates(directory="templates")
 
 
