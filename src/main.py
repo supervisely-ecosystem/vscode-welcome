@@ -1,12 +1,33 @@
-from fastapi import FastAPI, Request
+import os
+import sys
+from dotenv import load_dotenv
+from fastapi import FastAPI, Request, Depends
 from fastapi.staticfiles import StaticFiles
 import supervisely as sly
 import names
 
 
+app_repo_dir = os.getcwd()  # app root directory (working directory)
+sys.path.append(app_repo_dir)
+print(f"App root directory: {app_repo_dir}")
+
+# order matters
+load_dotenv(os.path.join(app_repo_dir, "secret.env"))
+load_dotenv(os.path.join(app_repo_dir, "debug.env"))
+
 # init global state and data (singletons)
-sly.app.LastStateJson({"name": ""})
-sly.app.DataJson({})
+sly.app.LastStateJson(
+    {
+        "name": "",
+        "localPath": "",
+    }
+)
+sly.app.DataJson(
+    {
+        "agentPath": os.getenv("SUPERVISELY_AGENT_FILES"),
+        "vscodeDir": "vscode",
+    }
+)
 
 app = FastAPI()
 sly_app = sly.app.fastapi.create()
@@ -25,3 +46,13 @@ async def generate(request: Request):
     data = sly.app.DataJson()
     data["name"] = names.get_first_name()
     await data.synchronize_changes()
+
+
+@app.post("/generate-local-path")
+async def generate_local_path(
+    request: Request, state: sly.app.StateJson = Depends(sly.app.StateJson.from_request)
+):
+    state["localPath"] = os.path.join(
+        os.getenv("SUPERVISELY_AGENT_FILES"), "vscode", state["name"]
+    )
+    await state.synchronize_changes()

@@ -1,7 +1,42 @@
 <link href="/static/styles.css" rel="stylesheet" />
 
+<pre>{{data}}</pre>
+<pre>{{state}}</pre>
 <sly-field
+  class="short"
   title="Application name"
+  description="This name will be used to create folders structure and github repo (optional)"
+>
+  <el-input
+    placeholder="Please input name"
+    v-model="state.name"
+    @change="post('/generate-local-path')"
+  ></el-input>
+</sly-field>
+
+<sly-field
+  class="short"
+  title="Path on server"
+  description="All project files including source code will be located at the following directory on the computer with current Agent"
+>
+  <el-tooltip
+    class="item"
+    effect="dark"
+    :content="state.localPath"
+    placement="top-start"
+  >
+    <el-input
+      class="form"
+      placeholder="Please input name"
+      v-model="state.localPath"
+      :disabled="true"
+    ></el-input>
+  </el-tooltip>
+</sly-field>
+
+<sly-field
+  class="short"
+  title="Path in Team Files"
   description="This name will be used to create folders structure and github repo (optional)"
 >
   <el-input
