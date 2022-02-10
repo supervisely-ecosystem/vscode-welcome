@@ -12,6 +12,7 @@ sys.path.append(os.path.join(app_repo_dir, "src"))
 print(f"App root directory: {app_repo_dir}")
 
 # @TODO: repo visibility
+# @TODO: start new vs open recent
 
 # order matters
 load_dotenv(os.path.join(app_repo_dir, "secret.env"))
