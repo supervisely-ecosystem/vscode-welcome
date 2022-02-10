@@ -1,7 +1,5 @@
 <link href="/static/styles.css" rel="stylesheet" />
 
-<pre>{{data}}</pre>
-<pre>{{state}}</pre>
 <sly-field
   class="short"
   title="Application name"
@@ -25,12 +23,7 @@
     :content="state.localPath"
     placement="top-start"
   >
-    <el-input
-      class="form"
-      placeholder="Please input name"
-      v-model="state.localPath"
-      :disabled="true"
-    ></el-input>
+    <pre class="short-text"><code>{{state.localPath}}</code></pre>
   </el-tooltip>
 </sly-field>
 

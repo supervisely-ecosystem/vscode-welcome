@@ -6,6 +6,11 @@ from fastapi.staticfiles import StaticFiles
 import supervisely as sly
 import names
 
+from preview_paths import (
+    preview_local_path,
+    preview_team_files_path,
+    generate_project_name,
+)
 
 app_repo_dir = os.getcwd()  # app root directory (working directory)
 sys.path.append(app_repo_dir)
@@ -15,17 +20,19 @@ print(f"App root directory: {app_repo_dir}")
 load_dotenv(os.path.join(app_repo_dir, "secret.env"))
 load_dotenv(os.path.join(app_repo_dir, "debug.env"))
 
+
+name = generate_project_name()
+
 # init global state and data (singletons)
 sly.app.LastStateJson(
     {
-        "name": "",
-        "localPath": "",
+        "name": name,
     }
 )
 sly.app.DataJson(
     {
-        "agentPath": os.getenv("SUPERVISELY_AGENT_FILES"),
-        "vscodeDir": "vscode",
+        "localPath": preview_local_path(name),
+        "teamFilesPath": preview_team_files_path(name),
     }
 )
 
