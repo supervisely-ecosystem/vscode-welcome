@@ -1,7 +1,9 @@
 import os
 from haikunator import Haikunator
 import supervisely as sly
+from fastapi import APIRouter, Request, Depends
 
+router = APIRouter()
 
 _vscode = "vscode"
 _agent_name = os.environ["AGENT_NAME"]
@@ -32,3 +34,23 @@ def init(state: dict, data: dict):
 def update_paths(name: str, data: dict):
     data["localPath"] = preview_local_path(name)
     data["teamFilesPath"] = preview_team_files_path(name)
+
+
+@router.post("/generate")
+async def generate(
+    request: Request, state: sly.app.StateJson = Depends(sly.app.StateJson.from_request)
+):
+    print(sly.app.LastStateJson())
+    data = sly.app.DataJson()
+    init(state, data)
+    await state.synchronize_changes()
+    await data.synchronize_changes()
+
+
+@router.post("/name-changed")
+async def name_changed(
+    request: Request, state: sly.app.StateJson = Depends(sly.app.StateJson.from_request)
+):
+    data = sly.app.DataJson()
+    update_paths(state["name"], data)
+    await data.synchronize_changes()
