@@ -1,4 +1,3 @@
-<link href="/static/styles.css" rel="stylesheet" />
 <sly-card title="General settings" subtitle="define name and preview paths">
   <sly-field
     title="Application name"
@@ -25,7 +24,7 @@
 
   <sly-field
     title="Path in team files"
-    description="This name will be used to create folders structure and github repo (optional)"
+    description="Files on your computer can be accessed in team files in the following location"
   >
     <sly-copy-to-clipboard :data="data.teamFilesPath"></sly-copy-to-clipboard>
   </sly-field>
