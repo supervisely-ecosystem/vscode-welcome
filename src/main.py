@@ -34,7 +34,7 @@ print(sly.app.LastStateJson())
 app = FastAPI()
 sly_app = sly.app.fastapi.create()
 app.mount("/sly", sly_app)
-app.mount("/static", StaticFiles(directory="static", html=True), name="static")
+# app.mount("/static", StaticFiles(directory="static", html=True), name="static")
 templates = sly.app.fastapi.Jinja2Templates(directory="templates")
 
 
