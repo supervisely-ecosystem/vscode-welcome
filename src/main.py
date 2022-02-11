@@ -6,6 +6,7 @@ from fastapi.staticfiles import StaticFiles
 import supervisely as sly
 import names
 
+
 app_repo_dir = os.getcwd()  # app root directory (working directory)
 sys.path.append(app_repo_dir)
 sys.path.append(os.path.join(app_repo_dir, "src"))

@@ -20,23 +20,14 @@
     title="Path on server"
     description="All project files including source code will be located at the following directory on the computer with current Agent"
   >
-    <el-tooltip :content="data.localPath">
-      <!-- short  -->
-      <code class="path">
-        <div class="ellipsis-text">{{data.localPath}}</div>
-      </code>
-    </el-tooltip>
+    <sly-copy-to-clipboard :data="data.localPath"></sly-copy-to-clipboard>
   </sly-field>
 
   <sly-field
     title="Path in team files"
     description="This name will be used to create folders structure and github repo (optional)"
   >
-    <el-tooltip :content="data.teamFilesPath">
-      <code class="path">
-        <div class="ellipsis-text">{{data.teamFilesPath}}</div>
-      </code>
-    </el-tooltip>
+    <sly-copy-to-clipboard :data="data.teamFilesPath"></sly-copy-to-clipboard>
   </sly-field>
 
   <!-- <el-button type="primary" @click="post('/generate')">
