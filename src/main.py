@@ -33,7 +33,6 @@ sly.app.LastStateJson({"activeStep": 1})
 sly.app.DataJson({})
 card_general.init(sly.app.LastStateJson(), sly.app.DataJson())
 
-print(sly.app.LastStateJson())
 
 app = FastAPI()
 sly_app = sly.app.fastapi.create()
