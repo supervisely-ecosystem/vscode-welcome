@@ -25,20 +25,20 @@ load_dotenv(os.path.join(app_repo_dir, "debug.env"))
 
 # import src.preview_paths as step1
 
-import src.preview_paths as card_paths
-import src.demo_templates as card_demos
+import card_general
+import card_app_template
 
 # init global state and data (singletons)
 sly.app.LastStateJson({"activeStep": 1})
 sly.app.DataJson({})
-card_paths.init(sly.app.LastStateJson(), sly.app.DataJson())
+card_general.init(sly.app.LastStateJson(), sly.app.DataJson())
 
 print(sly.app.LastStateJson())
 
 app = FastAPI()
 sly_app = sly.app.fastapi.create()
 app.mount("/sly", sly_app)
-app.include_router(card_paths.router)
+app.include_router(card_general.router)
 # app.mount("/static", StaticFiles(directory="static", html=True), name="static")
 templates = sly.app.fastapi.Jinja2Templates(directory="templates")
 
@@ -49,6 +49,6 @@ async def read_index(request: Request):
         "index.html",
         {
             "request": request,
-            **card_demos.get_jinja2_context(),
+            **card_app_template.get_jinja2_context(),
         },
     )
