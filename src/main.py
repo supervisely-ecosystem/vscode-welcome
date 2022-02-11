@@ -13,9 +13,11 @@ sys.path.append(app_repo_dir)
 sys.path.append(os.path.join(app_repo_dir, "src"))
 print(f"App root directory: {app_repo_dir}")
 
+# @TODO: reload on html change
 # @TODO: repo visibility
 # @TODO: start new vs open recent
 # @TODO: replace special symbols (space-> '-') in app-name
+# @TODO: debug mode -add x-debug-mode : 1 in header
 
 # order matters
 load_dotenv(os.path.join(app_repo_dir, "secret.env"))
@@ -24,6 +26,7 @@ load_dotenv(os.path.join(app_repo_dir, "debug.env"))
 # import src.preview_paths as step1
 
 import src.preview_paths as card_paths
+import src.demo_templates as card_demos
 
 # init global state and data (singletons)
 sly.app.LastStateJson({"activeStep": 1})
@@ -42,4 +45,10 @@ templates = sly.app.fastapi.Jinja2Templates(directory="templates")
 
 @app.get("/")
 async def read_index(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse(
+        "index.html",
+        {
+            "request": request,
+            **card_demos.get_jinja2_context(),
+        },
+    )

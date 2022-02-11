@@ -8,3 +8,4 @@ supervisely==6.7.2
 jsonpatch==1.32
 black==22.1.0
 haikunator==2.1.0
+MarkupSafe==2.0.1
