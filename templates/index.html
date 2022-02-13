@@ -17,7 +17,7 @@
         </template>
       </sly-app>
     </div>
-    {% if DEBUG %} {{{ hot_reload.script(url_for('/hot-reload')) | safe }}} {%
+    {% if DEBUG %} {{{ hot_reload.script(url_for('hot-reload')) | safe }}} {%
     endif %}
   </body>
 </html>
