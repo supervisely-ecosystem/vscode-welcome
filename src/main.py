@@ -41,7 +41,7 @@ app.mount("/sly", sly_app)
 app.include_router(card_general.router)
 # app.mount("/static", StaticFiles(directory="static", html=True), name="static")
 templates = sly.app.fastapi.Jinja2Templates(directory="templates")
-
+sly.app.fastapi.enable_hot_reload_on_debug(app, templates)
 
 # gettrace = getattr(sys, "gettrace", None)
 # if gettrace is None:
@@ -60,12 +60,12 @@ templates = sly.app.fastapi.Jinja2Templates(directory="templates")
 # #     print("In runtime mode ...")
 
 
-hot_reload = arel.HotReload(paths=[arel.Path(".")])
-app.add_websocket_route("/hot-reload", route=hot_reload, name="hot-reload")
-app.add_event_handler("startup", hot_reload.startup)
-app.add_event_handler("shutdown", hot_reload.shutdown)
-templates.env.globals["DEBUG"] = "1"
-templates.env.globals["hot_reload"] = hot_reload
+# hot_reload = arel.HotReload(paths=[arel.Path(".")])
+# app.add_websocket_route("/hot-reload", route=hot_reload, name="hot-reload")
+# app.add_event_handler("startup", hot_reload.startup)
+# app.add_event_handler("shutdown", hot_reload.shutdown)
+# templates.env.globals["DEBUG"] = "1"
+# templates.env.globals["hot_reload"] = hot_reload
 
 
 @app.get("/")
