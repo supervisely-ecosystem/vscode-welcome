@@ -14,7 +14,6 @@ sys.path.append(app_repo_dir)
 sys.path.append(os.path.join(app_repo_dir, "src"))
 print(f"App root directory: {app_repo_dir}")
 
-# @TODO: reload on html change
 # @TODO: repo visibility
 # @TODO: start new vs open recent
 # @TODO: replace special symbols (space-> '-') in app-name
