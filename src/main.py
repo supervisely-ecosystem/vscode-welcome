@@ -36,11 +36,28 @@ card_general.init(sly.app.LastStateJson(), sly.app.DataJson())
 
 
 app = FastAPI()
-templates = sly.app.fastapi.Jinja2Templates(directory="templates")
-sly_app = sly.app.fastapi.create(templates)
+sly_app = sly.app.fastapi.create()
 app.mount("/sly", sly_app)
 app.include_router(card_general.router)
 # app.mount("/static", StaticFiles(directory="static", html=True), name="static")
+templates = sly.app.fastapi.Jinja2Templates(directory="templates")
+
+
+gettrace = getattr(sys, "gettrace", None)
+if gettrace is None:
+    print("Can not detect debug mode, no sys.gettrace")
+elif gettrace() and templates is not None:
+    print("In debug mode ...")
+    import arel
+
+    hot_reload = arel.HotReload(paths=[arel.Path(".")])
+    app.add_websocket_route("/hot-reload", route=hot_reload, name="hot-reload")
+    app.add_event_handler("startup", hot_reload.startup)
+    app.add_event_handler("shutdown", hot_reload.shutdown)
+    templates.env.globals["DEBUG"] = "1"
+    templates.env.globals["hot_reload"] = hot_reload
+else:
+    print("In runtime mode ...")
 
 
 @app.get("/")
