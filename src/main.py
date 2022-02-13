@@ -6,6 +6,7 @@ from fastapi import FastAPI, Request, Depends
 # from fastapi.staticfiles import StaticFiles
 import supervisely as sly
 import names
+import arel
 
 
 app_repo_dir = os.getcwd()  # app root directory (working directory)
@@ -35,11 +36,11 @@ card_general.init(sly.app.LastStateJson(), sly.app.DataJson())
 
 
 app = FastAPI()
-sly_app = sly.app.fastapi.create()
+templates = sly.app.fastapi.Jinja2Templates(directory="templates")
+sly_app = sly.app.fastapi.create(templates)
 app.mount("/sly", sly_app)
 app.include_router(card_general.router)
 # app.mount("/static", StaticFiles(directory="static", html=True), name="static")
-templates = sly.app.fastapi.Jinja2Templates(directory="templates")
 
 
 @app.get("/")
