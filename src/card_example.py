@@ -10,7 +10,7 @@ def format_github_column(value):
 
 
 templates_table = sly.app.widgets.RadioTable(
-    widget_id="appTemplates",
+    widget_id="templates_table",
     columns=["name", "github", "column #3"],
     rows=[
         [
@@ -30,7 +30,7 @@ templates_table = sly.app.widgets.RadioTable(
 
 
 def get_jinja2_context():
-    return {"templates_table": templates_table}
+    return {templates_table.widget_id: templates_table}
 
 
 def init(data: dict, state: dict):
