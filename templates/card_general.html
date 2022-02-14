@@ -4,10 +4,11 @@
     description="This name will be used to create folders structure and github repo (optional)"
   >
     <div class="fflex">
+      <!-- @change="post.trottled('/name-changed')" -->
       <el-input
         placeholder="Please input name"
         v-model="state.name"
-        @change="post('/name-changed')"
+        @change="post.throttled('/name-changed')"
       ></el-input>
       <el-button class="ml10" @click="post('/generate')">
         <i class="zmdi zmdi-rotate-left mr5"></i> Generate
