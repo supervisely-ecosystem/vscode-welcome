@@ -21,7 +21,7 @@ templates_table = sly.app.widgets.RadioTable(
         [
             "Random point",
             "https://github.com/supervisely-ecosystem/dev-names-generator.git",
-            None,
+            "abcd",
         ],
     ],
     subtitles={"name": "subname"},
@@ -30,7 +30,7 @@ templates_table = sly.app.widgets.RadioTable(
 
 
 def get_jinja2_context():
-    return {"app_templates": templates_table}
+    return {"templates_table": templates_table}
 
 
 def init(data: dict, state: dict):
