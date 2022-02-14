@@ -29,10 +29,10 @@ import card_general
 import card_app_template
 
 # init global state and data (singletons)
-sly.app.LastStateJson({"activeStep": 1})
-sly.app.DataJson({})
-card_general.init(sly.app.DataJson(), sly.app.LastStateJson())
-card_app_template.init(sly.app.DataJson(), sly.app.LastStateJson())
+last_state = sly.app.LastStateJson({"activeStep": 1})
+data = sly.app.DataJson({})
+card_general.init(data, last_state)
+card_app_template.init(data, last_state)
 
 
 app = FastAPI()
