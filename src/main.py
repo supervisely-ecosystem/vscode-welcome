@@ -18,14 +18,6 @@ print(f"App root directory: {app_repo_dir}")
 # @TODO: start new vs open recent
 # @TODO: replace special symbols (space-> '-') in app-name
 # @TODO: debug mode -add x-debug-mode : 1 in header
-# @TODO: https://stackoverflow.com/questions/1690400/getting-an-instance-name-inside-class-init
-# https://stackoverflow.com/questions/63436496/is-it-possible-to-have-python-ides-offer-autocompletion-for-dynamically-generate
-# https://stackoverflow.com/questions/13603088/python-dynamic-help-and-autocomplete-generation/13603392#13603392
-# https://intellij-support.jetbrains.com/hc/en-us/community/posts/115000665110-auto-completion-for-dynamic-module-attributes-in-python
-# https://amir.rachum.com/blog/2016/10/05/python-dynamic-attributes/
-# https://stackoverflow.com/questions/13603088/python-dynamic-help-and-autocomplete-generation
-# https://github.com/dsc/bunch
-# https://github.com/python-attrs/attrs
 
 # order matters
 load_dotenv(os.path.join(app_repo_dir, "secret.env"))
