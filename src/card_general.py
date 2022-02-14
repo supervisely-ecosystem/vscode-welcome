@@ -25,7 +25,7 @@ def generate_project_name():
     return _default_name + _haikunator.haikunate(token_length=0)
 
 
-def init(state: dict, data: dict):
+def init(data: dict, state: dict):
     name = generate_project_name()
     state["name"] = name
     update_paths(name, data)
