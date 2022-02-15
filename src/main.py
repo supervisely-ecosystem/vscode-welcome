@@ -22,14 +22,17 @@ data = sly.app.DataJson({})
 app = FastAPI()
 templates = sly.app.fastapi.Jinja2Templates(directory="templates")
 app.mount("/sly", sly.app.fastapi.create())
+api = sly.Api.from_env()
 # app.mount("/static", StaticFiles(directory="static", html=True), name="static")
 sly.app.fastapi.enable_hot_reload_on_debug(app, templates)
 
 import card_name
 import card_example
+import card_github
 
 card_name.init(app, templates, data, last_state)
 card_example.init(app, templates, data, last_state)
+card_github.init(app, templates, api, data, last_state)
 
 
 @app.get("/")

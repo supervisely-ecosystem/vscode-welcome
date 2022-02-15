@@ -2,7 +2,8 @@
   "python.pythonPath": "venv/bin/python",
   "files.exclude": {
     "**/__pycache__": true,
-    "venv": true
+    "venv": true,
+    // "supervisely": true
   },
   "editor.formatOnSave": true,
   "editor.formatOnPaste": true,

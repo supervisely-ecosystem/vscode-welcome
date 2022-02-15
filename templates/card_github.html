@@ -1,5 +1,12 @@
-<div>github</div>
-<div>new field</div>
-<div>new field2</div>
-<!-- <div>new field3</div> -->
-<!-- <div v-for="a in 10">new field {{a}}</div> -->
+<sly-card
+  title="Github repository"
+  subtitle="Sources will be automatically connected with a newly-created github repo. 
+  With version control you never miss your work."
+>
+  <sly-field
+    title="New repository"
+    description="Will be created in your github account"
+  >
+    <sly-copy-to-clipboard :data="data.repoUrl"></sly-copy-to-clipboard>
+  </sly-field>
+</sly-card>
