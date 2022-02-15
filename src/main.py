@@ -40,5 +40,6 @@ async def read_index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 
+# @TODO: handle github token errors
 # @TODO: repo visibility
 # @TODO: start new vs open recent

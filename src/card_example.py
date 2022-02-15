@@ -20,22 +20,20 @@ def format_description_column(value):
 
 examples = sly.app.widgets.RadioTable(
     widget_id="examples",
-    columns=["name", "description", "github", "column #3"],
+    columns=["name", "github", "description"],
     rows=[
         [
             "Hello <user>!",
-            "How to handle button clicks and dynamically update variable",
             "https://github.com/supervisely-ecosystem/dev-names-generator.git",
-            None,
+            "How to handle button clicks and dynamically update variable",
         ],
         [
             "Random circle",
-            "Upload local image, modify it and preview both images",
             "https://github.com/supervisely-ecosystem/dev-names-generator.git",
-            "abcd",
+            "Upload local image, modify it and preview both images",
         ],
     ],
-    subtitles={"name": "subname"},
+    subtitles={},  # {"name": "subname"},
     column_formatters={
         "github": format_github_column,
         "description": format_description_column,
