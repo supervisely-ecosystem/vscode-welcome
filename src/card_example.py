@@ -1,4 +1,6 @@
 import supervisely as sly
+from fastapi import FastAPI
+from supervisely.app.fastapi import Jinja2Templates
 
 
 def format_github_column(value):
@@ -9,8 +11,8 @@ def format_github_column(value):
     return new_val
 
 
-templates_table = sly.app.widgets.RadioTable(
-    widget_id="templates_table",
+examples = sly.app.widgets.RadioTable(
+    widget_id="examples",
     columns=["name", "github", "column #3"],
     rows=[
         [
@@ -29,9 +31,6 @@ templates_table = sly.app.widgets.RadioTable(
 )
 
 
-def get_jinja2_context():
-    return {templates_table.widget_id: templates_table}
-
-
-def init(data: dict, state: dict):
-    templates_table.init(data, state)
+def init(app: FastAPI, templates: Jinja2Templates, data: dict, state: dict):
+    examples.init(data, state)
+    templates.context_widgets[examples.widget_id] = examples

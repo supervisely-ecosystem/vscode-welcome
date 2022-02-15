@@ -1,7 +1,8 @@
 import os
 from haikunator import Haikunator
 import supervisely as sly
-from fastapi import APIRouter, Request, Depends
+from fastapi import APIRouter, FastAPI, Request, Depends
+from supervisely.app.fastapi import Jinja2Templates
 
 router = APIRouter()
 
@@ -25,10 +26,11 @@ def generate_project_name():
     return _default_name + _haikunator.haikunate(token_length=0)
 
 
-def init(data: dict, state: dict):
+def init(app: FastAPI, templates: Jinja2Templates, data: dict, state: dict):
     name = generate_project_name()
     state["name"] = name
     update_paths(name, data)
+    app.include_router(router)
 
 
 def update_paths(name: str, data: dict):
