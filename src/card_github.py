@@ -11,6 +11,22 @@ gh_info = {}
 _private_path = os.path.expanduser("~/.ssh/id_rsa")
 _public_path = os.path.expanduser("~/.ssh/id_rsa.pub")
 
+gh_token_warning = sly.app.widgets.NotificationBox(
+    widget_id="gh_token_warning",
+    title="Warning: add github token to your Supervisely account",
+    description="""
+    Automatic github integration can be used only if you
+        <a
+          href="https://docs.supervise.ly/enterprise-edition/advanced-tuning/private-apps"
+          target="_blank"
+        >
+          add Github token to your Supervisely account</a
+        >. Otherwise you can organize version control later manually (for
+        advanced users).
+    """,
+    box_type="warning",
+)
+
 
 def generate_repo_url(state):
     name = state["name"]
@@ -56,6 +72,9 @@ def init(
     # state["name"] = name
     # update_paths(name, data)
     # app.include_router(router)
+
+    gh_token_warning.init(data, state)
+    templates.context_widgets[gh_token_warning.widget_id] = gh_token_warning
 
 
 def connect_to_github(api: sly.Api, data: DataJson, state: StateJson):

@@ -3,32 +3,13 @@
   subtitle="Sources will be automatically connected with a newly-created github repo. 
   With version control you never miss your work."
 >
-  <div v-if="data.github_error">
-    <sly-field v-if="data.github_error" title="Warning: provide Github token">
-      <div slot="description">
-        automatic github integration can be used only if you
-        <a
-          href="https://docs.supervise.ly/enterprise-edition/advanced-tuning/private-apps"
-          target="_blank"
-        >
-          add Github token to your Supervisely account</a
-        >. Otherwise you can organize version control later manually (for
-        advanced users).
-      </div>
-      <sly-icon
-        slot="icon"
-        :options="{ color: '#fba607', bgColor: '#ffe9da', rounded: false }"
-      >
-        <i class="zmdi zmdi-info"></i>
-      </sly-icon>
-    </sly-field>
-  </div>
-  <div v-else>
+  <div v-if="data.github_error">{{{gh_token_warning.to_html()}}}</div>
+  <!-- <div v-else>
     <sly-field
       title="New repository"
       description="Will be created in your github account"
     >
       <sly-copy-to-clipboard :data="data.repoUrl"></sly-copy-to-clipboard>
     </sly-field>
-  </div>
+  </div> -->
 </sly-card>

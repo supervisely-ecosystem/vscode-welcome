@@ -44,3 +44,6 @@ examples = sly.app.widgets.RadioTable(
 def init(app: FastAPI, templates: Jinja2Templates, data: dict, state: dict):
     examples.init(data, state)
     templates.context_widgets[examples.widget_id] = examples
+
+
+#   <!-- <div v-if="data.github_error">{{{gh_token_warning.to_html()}}}</div> -->
