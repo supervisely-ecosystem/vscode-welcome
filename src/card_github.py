@@ -1,7 +1,9 @@
 import sys
 import os
+import requests
 import supervisely as sly
 from fastapi import APIRouter, FastAPI, Request, Depends
+from supervisely.app.content import DataJson, StateJson
 from supervisely.app.fastapi import Jinja2Templates
 
 
@@ -21,7 +23,11 @@ def update_repo_url(data, state):
 
 
 def init(
-    app: FastAPI, templates: Jinja2Templates, api: sly.Api, data: dict, state: dict
+    app: FastAPI,
+    templates: Jinja2Templates,
+    api: sly.Api,
+    data: DataJson,
+    state: StateJson,
 ):
     def create_keys():
         sly.logger.info("Create SSH keys")
@@ -44,10 +50,19 @@ def init(
         # in container for production
         create_keys()
 
-    global gh_info
-    gh_info = api.github.get_account_info()
+    connect_to_github(api, data, state)
     update_repo_url(data, state)
     # name = generate_project_name()
     # state["name"] = name
     # update_paths(name, data)
     # app.include_router(router)
+
+
+def connect_to_github(api: sly.Api, data: DataJson, state: StateJson):
+    global gh_info
+
+    try:
+        # gh_info = api.github.get_account_info()
+        raise requests.exceptions.HTTPError("123")
+    except requests.exceptions.HTTPError as e:
+        data["github_error"] = str(e)
