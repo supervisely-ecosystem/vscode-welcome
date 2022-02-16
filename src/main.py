@@ -17,7 +17,7 @@ load_dotenv(os.path.join(app_repo_dir, "secret.env"))
 load_dotenv(os.path.join(app_repo_dir, "debug.env"))
 
 # init global state and data (singletons)
-last_state = sly.app.LastStateJson({"activeStep": 1})
+state = sly.app.StateJson({"activeStep": 1})
 data = sly.app.DataJson({})
 app = FastAPI()
 templates = sly.app.fastapi.Jinja2Templates(directory="templates")
@@ -30,9 +30,9 @@ import card_name
 import card_example
 import card_github
 
-card_name.init(app, templates, data, last_state)
-card_example.init(app, templates, data, last_state)
-card_github.init(app, templates, api, data, last_state)
+card_name.init(app, templates, data, state)
+card_example.init(app, templates, data, state)
+card_github.init(app, templates, api, data, state)
 
 
 @app.get("/")
