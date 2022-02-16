@@ -17,8 +17,7 @@ load_dotenv(os.path.join(app_repo_dir, "secret.env"))
 load_dotenv(os.path.join(app_repo_dir, "debug.env"))
 
 # init global state and data (singletons)
-state = sly.app.StateJson({"activeStep": 1})
-data = sly.app.DataJson({})
+
 app = FastAPI()
 templates = sly.app.fastapi.Jinja2Templates(directory="templates")
 app.mount("/sly", sly.app.fastapi.create())
@@ -30,6 +29,11 @@ import card_name
 import card_example
 import card_github
 
+state = sly.app.StateJson({"activeStep": 1})
+data = sly.app.DataJson()
+
+# state = sly.app.StateJson()
+
 card_name.init(app, templates, data, state)
 card_example.init(app, templates, data, state)
 card_github.init(app, templates, api, data, state)
@@ -40,6 +44,7 @@ async def read_index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 
+# @TODO: widget checks widet_id key in global state and raises error
 # @TODO: handle github token errors
 # @TODO: repo visibility
 # @TODO: start new vs open recent
