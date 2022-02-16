@@ -44,9 +44,9 @@ def update_paths(state: StateJson, data: DataJson):
 
 @router.post("/generate")
 async def generate(
-    request: Request, state: sly.app.StateJson = Depends(sly.app.StateJson.from_request)
+    request: Request, state: StateJson = Depends(StateJson.from_request)
 ):
-    data = sly.app.DataJson()
+    data = DataJson()
     state["name"] = generate_project_name()
     update_paths(state, data)
     await state.synchronize_changes()
@@ -55,8 +55,8 @@ async def generate(
 
 @router.post("/name-changed")
 async def name_changed(
-    request: Request, state: sly.app.StateJson = Depends(sly.app.StateJson.from_request)
+    request: Request, state: StateJson = Depends(StateJson.from_request)
 ):
-    data = sly.app.DataJson()
+    data = DataJson()
     update_paths(state, data)
     await data.synchronize_changes()
