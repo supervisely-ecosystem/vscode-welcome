@@ -48,3 +48,4 @@ async def read_index(request: Request):
 # @TODO: handle github token errors
 # @TODO: repo visibility
 # @TODO: start new vs open recent
+# @TODO: sdk widfget style - import local script tag <link>
