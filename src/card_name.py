@@ -5,7 +5,7 @@ from fastapi import APIRouter, FastAPI, Request, Depends
 from supervisely.app.content import DataJson, StateJson
 from supervisely.app.fastapi import Jinja2Templates
 
-import src.card_github
+import card_github
 
 router = APIRouter()
 
@@ -35,7 +35,7 @@ def update_paths():
     name = state["name"]
     data["localPath"] = generate_local_path(name)
     data["teamFilesPath"] = generate_team_files_path(name)
-    src.card_github.update_repo_url(name)
+    card_github.update_repo_url(name)
 
 
 @router.post("/generate")
@@ -62,3 +62,6 @@ def init():
     state = StateJson()
     state["name"] = generate_project_name()
     update_paths()
+
+
+init()

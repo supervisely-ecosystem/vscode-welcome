@@ -38,7 +38,18 @@ def update_repo_url(name: str):
     data["repoUrl"] = generate_repo_url(name)
 
 
-def init(api: sly.Api):
+def connect_to_github(api: sly.Api):
+    global gh_info
+    try:
+        # gh_info = api.github.get_account_info()
+        raise requests.exceptions.HTTPError("123")
+    except requests.exceptions.HTTPError as e:
+        data = DataJson()
+        data["github_error"] = str(e)
+
+
+def init():
+    api = sly.Api.from_env()
     templates = Jinja2Templates()
 
     def create_keys():
@@ -63,18 +74,6 @@ def init(api: sly.Api):
         create_keys()
 
     connect_to_github(api)
-    # update_repo_url()
-    # name = generate_project_name()
-    # state["name"] = name
-    # update_paths(name, data)
-    # app.include_router(router)
 
 
-def connect_to_github(api: sly.Api):
-    global gh_info
-    try:
-        # gh_info = api.github.get_account_info()
-        raise requests.exceptions.HTTPError("123")
-    except requests.exceptions.HTTPError as e:
-        data = DataJson()
-        data["github_error"] = str(e)
+init()
