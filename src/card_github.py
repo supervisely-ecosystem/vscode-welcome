@@ -67,9 +67,6 @@ def init(app: FastAPI, templates: Jinja2Templates, api: sly.Api):
     # update_paths(name, data)
     # app.include_router(router)
 
-    gh_token_warning.init()
-    templates.context_widgets[gh_token_warning.widget_id] = gh_token_warning
-
 
 def connect_to_github(api: sly.Api):
     global gh_info
