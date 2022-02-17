@@ -41,8 +41,8 @@ examples = sly.app.widgets.RadioTable(
 )
 
 
-def init(app: FastAPI, templates: Jinja2Templates, data: dict, state: dict):
-    examples.init(data, state)
+def init(app: FastAPI, templates: Jinja2Templates):
+    examples.init()
     templates.context_widgets[examples.widget_id] = examples
 
 

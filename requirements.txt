@@ -4,7 +4,7 @@ websockets==10.1
 jinja2==3.0.3
 psutil==5.9.0
 python-dotenv==0.19.2
-supervisely==6.7.2
+supervisely==6.7.5
 jsonpatch==1.32
 black==22.1.0
 haikunator==2.1.0

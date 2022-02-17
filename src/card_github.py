@@ -28,23 +28,19 @@ gh_token_warning = sly.app.widgets.NotificationBox(
 )
 
 
-def generate_repo_url(state):
+def generate_repo_url():
+    state = StateJson()
     name = state["name"]
     organization = gh_info.get("login", "your-organization")
     return f"https://github.com/{organization}/{name}"
 
 
-def update_repo_url(data, state):
-    data["repoUrl"] = generate_repo_url(state)
+def update_repo_url():
+    data = DataJson()
+    data["repoUrl"] = generate_repo_url()
 
 
-def init(
-    app: FastAPI,
-    templates: Jinja2Templates,
-    api: sly.Api,
-    data: DataJson,
-    state: StateJson,
-):
+def init(app: FastAPI, templates: Jinja2Templates, api: sly.Api):
     def create_keys():
         sly.logger.info("Create SSH keys")
         keys = api.user.get_github_keys()
@@ -66,22 +62,22 @@ def init(
         # in container for production
         create_keys()
 
-    connect_to_github(api, data, state)
-    update_repo_url(data, state)
+    connect_to_github(api)
+    update_repo_url()
     # name = generate_project_name()
     # state["name"] = name
     # update_paths(name, data)
     # app.include_router(router)
 
-    gh_token_warning.init(data, state)
+    gh_token_warning.init()
     templates.context_widgets[gh_token_warning.widget_id] = gh_token_warning
 
 
-def connect_to_github(api: sly.Api, data: DataJson, state: StateJson):
+def connect_to_github(api: sly.Api):
     global gh_info
-
     try:
         # gh_info = api.github.get_account_info()
         raise requests.exceptions.HTTPError("123")
     except requests.exceptions.HTTPError as e:
+        data = DataJson()
         data["github_error"] = str(e)

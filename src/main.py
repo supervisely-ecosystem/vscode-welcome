@@ -34,9 +34,9 @@ data = sly.app.DataJson()
 
 # state = sly.app.StateJson()
 
-card_name.init(app, templates, data, state)
-card_example.init(app, templates, data, state)
-card_github.init(app, templates, api, data, state)
+card_name.init(app, templates)
+card_example.init(app, templates)
+card_github.init(app, templates, api)
 
 
 @app.get("/")
@@ -44,7 +44,6 @@ async def read_index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 
-# @TODO: test SDK without manifest
 # @TODO: widget checks widet_id key in global state / data and raises error
 # @TODO: handle github token errors
 # @TODO: repo visibility

@@ -29,17 +29,20 @@ def generate_project_name():
     return _default_name + _haikunator.haikunate(token_length=0)
 
 
-def init(app: FastAPI, templates: Jinja2Templates, data: dict, state: dict):
+def init(app: FastAPI, templates: Jinja2Templates):
+    state = StateJson()
     state["name"] = generate_project_name()
-    update_paths(state, data)
+    update_paths()
     app.include_router(router)
 
 
-def update_paths(state: StateJson, data: DataJson):
+def update_paths():
+    state = StateJson()
+    data = DataJson()
     name = state["name"]
     data["localPath"] = generate_local_path(name)
     data["teamFilesPath"] = generate_team_files_path(name)
-    card_github.update_repo_url(data, state)
+    card_github.update_repo_url()
 
 
 @router.post("/generate")
@@ -48,7 +51,7 @@ async def generate(
 ):
     data = DataJson()
     state["name"] = generate_project_name()
-    update_paths(state, data)
+    update_paths()
     await state.synchronize_changes()
     await data.synchronize_changes()
 
