@@ -38,7 +38,9 @@ def update_repo_url(name: str):
     data["repoUrl"] = generate_repo_url(name)
 
 
-def init(app: FastAPI, templates: Jinja2Templates, api: sly.Api):
+def init(app: FastAPI, api: sly.Api):
+    templates = Jinja2Templates()
+
     def create_keys():
         sly.logger.info("Create SSH keys")
         keys = api.user.get_github_keys()
