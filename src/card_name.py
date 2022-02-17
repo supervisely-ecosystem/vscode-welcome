@@ -58,7 +58,7 @@ async def name_changed(
     await data.synchronize_changes()
 
 
-def init(state: StateJson, app: FastAPI):
+def init():
+    state = StateJson()
     state["name"] = generate_project_name()
     update_paths()
-    app.include_router(router)

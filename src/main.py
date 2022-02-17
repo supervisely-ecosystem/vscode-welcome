@@ -9,10 +9,15 @@ import supervisely as sly
 load_dotenv("secret.env")
 load_dotenv("debug.env")
 
-app = FastAPI()
-app.mount("/sly", sly.app.fastapi.create())
-sly.app.fastapi.enable_hot_reload_on_debug(app)
+import src.card_name
+import src.card_example
+import src.card_github
 
+
+app = FastAPI()
+sly.app.fastapi.enable_hot_reload_on_debug(app)
+app.mount("/sly", sly.app.fastapi.create())
+app.include_router(src.card_name.router)
 
 api = sly.Api.from_env()
 
@@ -20,12 +25,9 @@ state = sly.app.StateJson()
 state["activeStep"] = 1
 data = sly.app.DataJson()
 
-import src.card_name
-import src.card_example
-import src.card_github
 
-src.card_name.init(state, app)
-src.card_github.init(app, api)
+src.card_name.init()
+src.card_github.init(api)
 
 
 @app.get("/")
