@@ -1,7 +1,6 @@
 import supervisely as sly
 from fastapi import FastAPI
 from supervisely.app.fastapi import Jinja2Templates
-import globals as g
 
 
 def format_github_column(value):

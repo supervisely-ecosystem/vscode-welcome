@@ -5,7 +5,6 @@ from fastapi import APIRouter, FastAPI, Request, Depends
 from supervisely.app.content import DataJson, StateJson
 from supervisely.app.fastapi import Jinja2Templates
 
-import globals as g
 import card_github
 
 router = APIRouter()
@@ -59,11 +58,7 @@ async def name_changed(
     await data.synchronize_changes()
 
 
-def init():
-    state = StateJson()
+def init(state: StateJson, app: FastAPI):
     state["name"] = generate_project_name()
     update_paths()
-    g.app.include_router(router)
-
-
-init()
+    app.include_router(router)

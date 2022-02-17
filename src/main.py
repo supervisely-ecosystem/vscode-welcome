@@ -1,12 +1,10 @@
 import os
 import sys
-
+from dotenv import load_dotenv
 from fastapi import FastAPI, Request, Depends
 from fastapi.staticfiles import StaticFiles
-import arel
 import supervisely as sly
 
-from dotenv import load_dotenv
 
 app_repo_dir = os.getcwd()  # app root directory (working directory)
 print(f"App root repo directory: {app_repo_dir}")
@@ -16,21 +14,28 @@ sys.path.append(os.path.join(app_repo_dir, "src"))
 load_dotenv(os.path.join(app_repo_dir, "secret.env"))
 load_dotenv(os.path.join(app_repo_dir, "debug.env"))
 
-import globals as g
-import card_name
-import card_example
-import card_github
+app = FastAPI()
+app.mount("/sly", sly.app.fastapi.create())
 
-from globals import app
+templates = sly.app.fastapi.Jinja2Templates(directory="templates")
+sly.app.fastapi.enable_hot_reload_on_debug(app, templates)
+api = sly.Api.from_env()
 
 state = sly.app.StateJson()
 state["activeStep"] = 1
 data = sly.app.DataJson()
 
+import card_name
+import card_example
+import card_github
 
-@g.app.get("/")
+card_name.init(state, app)
+card_github.init(app, templates, api)
+
+
+@app.get("/")
 async def read_index(request: Request):
-    return g.templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse("index.html", {"request": request})
 
 
 # @TODO: handle exceptions
