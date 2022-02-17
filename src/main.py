@@ -44,7 +44,8 @@ async def read_index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 
-# @TODO: widget checks widet_id key in global state and raises error
+# @TODO: test SDK without manifest
+# @TODO: widget checks widet_id key in global state / data and raises error
 # @TODO: handle github token errors
 # @TODO: repo visibility
 # @TODO: start new vs open recent
