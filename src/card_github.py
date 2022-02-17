@@ -28,16 +28,14 @@ gh_token_warning = sly.app.widgets.NotificationBox(
 )
 
 
-def generate_repo_url():
-    state = StateJson()
-    name = state["name"]
+def generate_repo_url(name: str):
     organization = gh_info.get("login", "your-organization")
     return f"https://github.com/{organization}/{name}"
 
 
-def update_repo_url():
+def update_repo_url(name: str):
     data = DataJson()
-    data["repoUrl"] = generate_repo_url()
+    data["repoUrl"] = generate_repo_url(name)
 
 
 def init(app: FastAPI, templates: Jinja2Templates, api: sly.Api):
@@ -63,7 +61,7 @@ def init(app: FastAPI, templates: Jinja2Templates, api: sly.Api):
         create_keys()
 
     connect_to_github(api)
-    update_repo_url()
+    # update_repo_url()
     # name = generate_project_name()
     # state["name"] = name
     # update_paths(name, data)

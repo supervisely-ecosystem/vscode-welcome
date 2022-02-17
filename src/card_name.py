@@ -36,7 +36,7 @@ def update_paths():
     name = state["name"]
     data["localPath"] = generate_local_path(name)
     data["teamFilesPath"] = generate_team_files_path(name)
-    card_github.update_repo_url()
+    card_github.update_repo_url(name)
 
 
 @router.post("/generate")

@@ -1,6 +1,7 @@
 import supervisely as sly
 from fastapi import FastAPI
 from supervisely.app.fastapi import Jinja2Templates
+import globals as g
 
 
 def format_github_column(value):
@@ -42,8 +43,7 @@ examples = sly.app.widgets.RadioTable(
 
 
 def init(app: FastAPI, templates: Jinja2Templates):
-    examples.init()
     templates.context_widgets[examples.widget_id] = examples
 
 
-init()
+init(g.app, g.templates)

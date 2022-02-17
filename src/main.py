@@ -21,6 +21,8 @@ import card_name
 import card_example
 import card_github
 
+from globals import app
+
 state = sly.app.StateJson()
 state["activeStep"] = 1
 data = sly.app.DataJson()
