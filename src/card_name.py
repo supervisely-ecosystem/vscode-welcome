@@ -5,6 +5,7 @@ from fastapi import APIRouter, FastAPI, Request, Depends
 from supervisely.app.content import DataJson, StateJson
 from supervisely.app.fastapi import Jinja2Templates
 
+import globals as g
 import card_github
 
 router = APIRouter()
@@ -27,13 +28,6 @@ def generate_team_files_path(name):
 
 def generate_project_name():
     return _default_name + _haikunator.haikunate(token_length=0)
-
-
-def init(app: FastAPI, templates: Jinja2Templates):
-    state = StateJson()
-    state["name"] = generate_project_name()
-    update_paths()
-    app.include_router(router)
 
 
 def update_paths():
@@ -63,3 +57,13 @@ async def name_changed(
     data = DataJson()
     update_paths(state, data)
     await data.synchronize_changes()
+
+
+def init():
+    state = StateJson()
+    state["name"] = generate_project_name()
+    update_paths()
+    g.app.include_router(router)
+
+
+init()

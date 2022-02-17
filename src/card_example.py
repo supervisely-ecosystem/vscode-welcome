@@ -46,4 +46,4 @@ def init(app: FastAPI, templates: Jinja2Templates):
     templates.context_widgets[examples.widget_id] = examples
 
 
-#   <!-- <div v-if="data.github_error">{{{gh_token_warning.to_html()}}}</div> -->
+init()

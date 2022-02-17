@@ -5,7 +5,7 @@ import supervisely as sly
 from fastapi import APIRouter, FastAPI, Request, Depends
 from supervisely.app.content import DataJson, StateJson
 from supervisely.app.fastapi import Jinja2Templates
-
+import globals as g
 
 gh_info = {}
 _private_path = os.path.expanduser("~/.ssh/id_rsa")
@@ -81,3 +81,6 @@ def connect_to_github(api: sly.Api):
     except requests.exceptions.HTTPError as e:
         data = DataJson()
         data["github_error"] = str(e)
+
+
+init(g.app, g.templates, g.api)
