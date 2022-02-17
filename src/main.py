@@ -37,11 +37,7 @@ async def read_index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 
-# @TODO: app, templates, api - global objects, how to avoid inits?
-# @TODO: make app / templates as global object
-# @TODO: widget checks widet_id key in global state / data and raises error
 # @TODO: handle github token errors
 # @TODO: repo visibility
 # @TODO: start new vs open recent
-# @TODO: sdk widfget style - import local script tag <link>
 # @TODO: api object from request (to handle labelers tokens)
