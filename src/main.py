@@ -5,17 +5,6 @@ from fastapi import FastAPI, Request, Depends
 from fastapi.staticfiles import StaticFiles
 import supervisely as sly
 
-# from supervisely.app.fastapi import Jinja2Templates
-
-# app_repo_dir = os.getcwd()  # app root directory (working directory)
-# print(f"App root repo directory: {app_repo_dir}")
-# sys.path.append(app_repo_dir)
-# sys.path.append(os.path.join(app_repo_dir, "src"))
-# order matters
-# load_dotenv(os.path.join(app_repo_dir, "secret.env"))
-# load_dotenv(os.path.join(app_repo_dir, "debug.env"))
-
-
 # order matters
 load_dotenv("secret.env")
 load_dotenv("debug.env")
