@@ -10,3 +10,22 @@
   <sly-stepper-item> {% include 'card_example.html' %} </sly-stepper-item>
   <sly-stepper-item> {% include 'card_github.html' %} </sly-stepper-item>
 </sly-stepper>
+
+<el-dialog
+  title="Restart step"
+  :visible.sync="state.restartEndpoint"
+  size="tiny"
+>
+  <span>This step and all next steps will be reset</span>
+  <span slot="footer" class="dialog-footer">
+    <el-button @click="state.restartEndpoint = null">Cancel</el-button>
+    <!--        $nextTick(() => { $refs['card3'].$el.scrollIntoView({behavior: 'smooth', block: 'center'}); });-->
+    <el-button
+      type="primary"
+      class="regular"
+      @click="post(state.restartEndpoint); state.restartEndpoint = null;"
+    >
+      Confirm
+    </el-button>
+  </span>
+</el-dialog>

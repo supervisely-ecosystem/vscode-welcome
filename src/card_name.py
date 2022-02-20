@@ -16,6 +16,16 @@ _agent_path = os.environ["SUPERVISELY_AGENT_FILES"]
 _haikunator = Haikunator()
 _default_name = "my-app-"
 
+done_label = sly.app.widgets.DoneLabel("new application is defined")
+
+
+def init():
+    state = StateJson()
+    state["name"] = generate_project_name()
+    data = DataJson()
+    data["done1"] = False
+    update_paths()
+
 
 def generate_local_path(name):
     return os.path.join(_agent_path, _vscode, name)
@@ -58,10 +68,22 @@ async def name_changed(
     await data.synchronize_changes()
 
 
-def init():
-    state = StateJson()
-    state["name"] = generate_project_name()
-    update_paths()
+@router.post("/next1")
+async def generate(
+    request: Request, state: StateJson = Depends(StateJson.from_request)
+):
+    data = DataJson()
+    data["done1"] = True
+    await data.synchronize_changes()
+
+
+@router.post("/change-name")
+async def generate(
+    request: Request, state: StateJson = Depends(StateJson.from_request)
+):
+    data = DataJson()
+    data["done1"] = False
+    await data.synchronize_changes()
 
 
 init()

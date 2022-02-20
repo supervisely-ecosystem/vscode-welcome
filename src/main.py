@@ -28,6 +28,7 @@ app.include_router(card_name.router)
 
 state = sly.app.StateJson()
 state["activeStep"] = 1
+state["restartEndpoint"] = None
 data = sly.app.DataJson()
 
 
