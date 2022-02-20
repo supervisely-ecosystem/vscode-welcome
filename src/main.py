@@ -38,7 +38,22 @@ async def read_index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 
-# @TODO: widgets storage? - separate fole???
+# all widgets in dict
+# https://mypy.readthedocs.io/en/latest/more_types.html#typeddict
+
+# d = {"a": app, "b": sly.Annotation([1, 1])}
+# d["a"].api_route  # no autocompletion
+
+# from prodict import Prodict
+
+# j = Prodict()
+# j.a = app
+# j.b = sly.Annotation([1, 1])
+# j.a.api_route  # with autocompletion
+
+
+# @TODO: restart dialog how to call routes functions from various files
+# @TODO: widgets storage? - separate file???
 # @TODO: handle github token errors
 # @TODO: repo visibility
 # @TODO: start new vs open recent
