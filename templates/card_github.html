@@ -4,12 +4,4 @@
   With version control you never miss your work."
 >
   <div v-if="data.github_error">{{{gh_token_warning.to_html()}}}</div>
-  <!-- <div v-else>
-    <sly-field
-      title="New repository"
-      description="Will be created in your github account"
-    >
-      <sly-copy-to-clipboard :data="data.repoUrl"></sly-copy-to-clipboard>
-    </sly-field>
-  </div> -->
 </sly-card>

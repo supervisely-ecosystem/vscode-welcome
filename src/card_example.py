@@ -1,6 +1,4 @@
 import supervisely as sly
-from fastapi import FastAPI
-from supervisely.app.fastapi import Jinja2Templates
 
 
 def format_github_column(value):
@@ -19,7 +17,6 @@ def format_description_column(value):
 
 
 examples = sly.app.widgets.RadioTable(
-    widget_id="examples",
     columns=["name", "github", "description"],
     rows=[
         [

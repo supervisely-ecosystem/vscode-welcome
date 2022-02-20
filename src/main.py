@@ -38,13 +38,6 @@ async def read_index(request: Request):
 
 
 # @TODO: widgets storage? - separate fole???
-# https://stackoverflow.com/questions/18425225/getting-the-name-of-a-variable-as-a-string
-# https://github.com/pwwang/python-varname
-# https://stackoverflow.com/questions/18425225/getting-the-name-of-a-variable-as-a-string/18425523#18425523
-# https://ideone.com/ym3bkD
-# https://github.com/pwwang/python-varname
-
-# @TODO: widget without id (id keyword)
 # @TODO: handle github token errors
 # @TODO: repo visibility
 # @TODO: start new vs open recent
