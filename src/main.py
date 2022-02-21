@@ -31,25 +31,15 @@ state["activeStep"] = 1
 state["restartEndpoint"] = None
 data = sly.app.DataJson()
 
+restart_dialog = sly.app.widgets.RestartDialog(
+    steps=[("step1", card_name.init), ("step2", card_name.init)]
+)
+
 
 @app.get("/")
 async def read_index(request: Request):
     templates = sly.app.fastapi.Jinja2Templates(directory="templates")
     return templates.TemplateResponse("index.html", {"request": request})
-
-
-# all widgets in dict
-# https://mypy.readthedocs.io/en/latest/more_types.html#typeddict
-
-# d = {"a": app, "b": sly.Annotation([1, 1])}
-# d["a"].api_route  # no autocompletion
-
-# from prodict import Prodict
-
-# j = Prodict()
-# j.a = app
-# j.b = sly.Annotation([1, 1])
-# j.a.api_route  # with autocompletion
 
 
 # @TODO: restart dialog how to call routes functions from various files
