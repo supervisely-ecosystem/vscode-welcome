@@ -2,6 +2,7 @@
   title="Github repository"
   subtitle="Sources will be automatically connected with a newly-created github repo. 
   With version control you never miss your work."
+  :collapsed.sync="state.step < 3"
 >
   <div v-if="data.github_error">{{{gh_token_warning.to_html()}}}</div>
 </sly-card>

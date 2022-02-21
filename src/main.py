@@ -31,7 +31,7 @@ state = sly.app.DataJson()
 state["step"] = 1
 
 
-restart_dialog = sly.app.widgets.RestartStep(steps=[])
+restart = sly.app.widgets.RestartStep(steps=[])
 
 
 @app.get("/")
