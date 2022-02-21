@@ -31,7 +31,7 @@ state["activeStep"] = 1
 state["restartEndpoint"] = None
 data = sly.app.DataJson()
 
-restart_dialog = sly.app.widgets.RestartDialog(
+restart_dialog = sly.app.widgets.RestartStep(
     steps=[("step1", card_name.init), ("step2", card_name.init)]
 )
 

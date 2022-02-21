@@ -77,12 +77,12 @@ async def generate(
     await data.synchronize_changes()
 
 
-@router.post("/change-name")
+@router.post("/restart1")
 async def generate(
     request: Request, state: StateJson = Depends(StateJson.from_request)
 ):
     data = DataJson()
-    data["done1"] = False
+    data["done1"] = True
     await data.synchronize_changes()
 
 
