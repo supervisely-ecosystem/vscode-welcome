@@ -42,7 +42,7 @@ async def read_index(request: Request):
 
 
 # @TODO: remove restart dialog from SDK
-# @TODO: handle errors with readble dialog window
+# @TODO: handle errors with readble dialog window - stack trace to html
 # @TODO: restart dialog how to call routes functions from various files
 # @TODO: widgets storage? - separate file???
 # @TODO: handle github token errors
