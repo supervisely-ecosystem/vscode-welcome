@@ -37,12 +37,4 @@ examples = sly.app.widgets.RadioTable(
         "description": format_description_column,
     },
 )
-
-
-def init():
-    data = DataJson()
-    data["done2"] = False
-
-
-def restart(data: DataJson, state: StateJson):
-    data["done2"] = False
+done2 = sly.app.widgets.DoneLabel("App will be initialized from template: <b>123</b>")

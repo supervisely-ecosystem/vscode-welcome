@@ -15,7 +15,7 @@ _agent_path = os.environ["SUPERVISELY_AGENT_FILES"]
 _haikunator = Haikunator()
 _default_name = "my-app-"
 
-done_label = sly.app.widgets.DoneLabel("new application is defined")
+done1 = sly.app.widgets.DoneLabel("New application is defined")
 
 
 def init():
