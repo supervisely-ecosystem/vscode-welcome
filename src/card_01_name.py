@@ -53,6 +53,7 @@ async def generate(
     data = DataJson()
     state["name"] = generate_project_name()
     update_paths()
+    state = None
     await state.synchronize_changes()
     await data.synchronize_changes()
 
@@ -62,7 +63,7 @@ async def name_changed(
     request: Request, state: StateJson = Depends(StateJson.from_request)
 ):
     data = DataJson()
-    update_paths(state, data)
+    update_paths()
     await data.synchronize_changes()
 
 
