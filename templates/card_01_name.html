@@ -50,12 +50,7 @@
   <div v-else>
     <div>{{{done1.to_html()}}}</div>
 
-    <el-button
-      type="warning"
-      class="regular mt10"
-      :plain="true"
-      @click="state.{{{restart.widget_id}}}.step = 1"
-    >
+    <el-button type="warning" class="regular mt10" :plain="true">
       <i class="zmdi zmdi-rotate-left mr5"></i>Change name
     </el-button>
   </div>
