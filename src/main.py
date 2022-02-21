@@ -25,11 +25,11 @@ state = sly.app.StateJson()
 data = sly.app.DataJson()
 state["step"] = 1
 
-import card_name
-import card_example
-import card_github
+import card_01_name
+import card_02_example
+import card_03_github
 
-app.include_router(card_name.router)
+app.include_router(card_01_name.router)
 
 
 restart = sly.app.widgets.RestartStep(steps=[])
@@ -41,6 +41,8 @@ async def read_index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 
+# @TODO: global app dependencies
+# @TODO: handle errors with readble dialog window
 # @TODO: restart dialog how to call routes functions from various files
 # @TODO: widgets storage? - separate file???
 # @TODO: handle github token errors
