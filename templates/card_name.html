@@ -35,7 +35,7 @@
     v-if="!data.done1"
     type="primary"
     class="regular"
-    @click="post('/next1')"
+    @click="state.step = 2"
   >
     Next
   </el-button>

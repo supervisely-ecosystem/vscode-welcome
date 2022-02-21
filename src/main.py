@@ -27,13 +27,11 @@ app.mount("/sly", sly.app.fastapi.create())
 app.include_router(card_name.router)
 
 state = sly.app.StateJson()
-state["activeStep"] = 1
-state["restartEndpoint"] = None
-data = sly.app.DataJson()
+state = sly.app.DataJson()
+state["step"] = 1
 
-restart_dialog = sly.app.widgets.RestartStep(
-    steps=[("step1", card_name.init), ("step2", card_name.init)]
-)
+
+restart_dialog = sly.app.widgets.RestartStep(steps=[])
 
 
 @app.get("/")
