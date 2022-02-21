@@ -1,6 +1,7 @@
 <sly-card
   title="Ready to use app template"
   subtitle="Select one of the prepared application templates, app will be automatically initialized with virtual environment and all vscode settings. Just press F5 and start development and debugging with a single click."
+  :options="{collapsable: true}"
   :collapsed.sync="state.step < 2"
 >
   <div>{{{examples.to_html()}}}</div>

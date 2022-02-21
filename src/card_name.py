@@ -66,12 +66,4 @@ async def name_changed(
     await data.synchronize_changes()
 
 
-@router.post("/next1")
-async def generate(
-    request: Request, state: StateJson = Depends(StateJson.from_request)
-):
-    state["step"] = 2
-    await state.synchronize_changes()
-
-
 init()

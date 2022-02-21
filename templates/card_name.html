@@ -1,8 +1,7 @@
-<div>step:{{ state.step }}</div>
-<div>{{ state.step < 3}}</div>
 <sly-card
   title="General settings"
   subtitle="define name and preview paths"
+  :options="{collapsable: true}"
   :collapsed.sync="state.step < 1"
 >
   <sly-field
@@ -10,14 +9,17 @@
     description="This name will be used to create folders structure and github repo (optional)"
   >
     <div class="fflex">
-      <!-- @change="post.trottled('/name-changed')" -->
       <el-input
         placeholder="Please input name"
         v-model="state.name"
-        :disabled="data.done1"
+        :disabled="state.step !== 1"
         @change="post.throttled('/name-changed')"
       ></el-input>
-      <el-button class="ml10" @click="post('/generate')" :disabled="data.done1">
+      <el-button
+        class="ml10"
+        @click="post('/generate')"
+        :disabled="state.step !== 1"
+      >
         <i class="zmdi zmdi-rotate-left mr5"></i> Generate
       </el-button>
     </div>
@@ -38,15 +40,14 @@
   </sly-field>
 
   <el-button
-    v-if="!data.done1"
+    v-if="state.step == 1"
     type="primary"
     class="regular"
     @click="state.step = 2"
   >
     Next
   </el-button>
-
-  <div v-if="data.done1">
+  <div v-else>
     <div>{{{done_label.to_html()}}}</div>
 
     <el-button
