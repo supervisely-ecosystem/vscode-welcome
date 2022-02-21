@@ -41,7 +41,7 @@ async def read_index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 
-# @TODO: global app dependencies
+# @TODO: remove restart dialog from SDK
 # @TODO: handle errors with readble dialog window
 # @TODO: restart dialog how to call routes functions from various files
 # @TODO: widgets storage? - separate file???
