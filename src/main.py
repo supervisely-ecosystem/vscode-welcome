@@ -18,14 +18,14 @@ load_dotenv(os.path.join(root_dir, "debug.env"))
 
 
 app = FastAPI()
-sly.app.fastapi.init(app, root_dir)
+sly.app.fastapi.init(app)
 
 state = sly.app.StateJson()
 data = sly.app.DataJson()
 state["step"] = 1
 
 # @TODO: rename _haikunator remove all leading _
-import src.card_01_name
+import src.card_01_name as card_01_name
 import card_02_example
 import card_03_github
 
