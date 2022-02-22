@@ -1,4 +1,5 @@
 import os
+from typing import TypedDict
 from haikunator import Haikunator
 import supervisely as sly
 from fastapi import APIRouter, FastAPI, Request, Depends
@@ -22,7 +23,6 @@ done1 = sly.app.widgets.DoneLabel("New application is defined")
 # print(Path(__file__).stem)
 # print(Path(__file__).absolute())
 # print(Path(__file__).parent.absolute())
-
 # templates = Jinja2Templates()
 # templates.context_widgets["card_01_name"] = self
 
@@ -59,11 +59,9 @@ def update_paths():
 async def generate(
     request: Request, state: StateJson = Depends(StateJson.from_request)
 ):
-    raise ValueError(123)
     data = DataJson()
     state["name"] = generate_project_name()
     update_paths()
-    state = None
     await state.synchronize_changes()
     await data.synchronize_changes()
 

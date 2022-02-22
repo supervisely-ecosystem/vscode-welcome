@@ -8,22 +8,23 @@ import supervisely as sly
 
 
 src_dir = str(Path(__file__).parent.absolute())
-app_dir = str(Path(src_dir).parent)
-sys.path.extend([src_dir, app_dir])
-print(f"PYTHON_PATH updated: {[src_dir, app_dir]}")
+root_dir = str(Path(src_dir).parent)
+sys.path.extend([src_dir, root_dir])
+print(f"PYTHON_PATH updated: {[src_dir, root_dir]}")
 
 # order matters (used for debug)
-load_dotenv(os.path.join(app_dir, "secret.env"))
-load_dotenv(os.path.join(app_dir, "debug.env"))
+load_dotenv(os.path.join(root_dir, "secret.env"))
+load_dotenv(os.path.join(root_dir, "debug.env"))
 
 
 app = FastAPI()
-sly.app.fastapi.init(app)
+sly.app.fastapi.init(app, root_dir)
 
 state = sly.app.StateJson()
 data = sly.app.DataJson()
 state["step"] = 1
 
+# @TODO: rename _haikunator remove all leading _
 import card_01_name
 import card_02_example
 import card_03_github
@@ -33,8 +34,8 @@ app.include_router(card_01_name.router)
 
 @app.get("/")
 async def read_index(request: Request):
-    templates = sly.app.fastapi.Jinja2Templates(directory="templates")
-    return templates.TemplateResponse("index.html", {"request": request})
+    templates = sly.app.fastapi.Jinja2Templates(directory=root_dir)
+    return templates.TemplateResponse("templates/index.html", {"request": request})
 
 
 # @TODO: restart dialog how to call routes functions from various files
