@@ -8,6 +8,7 @@ from supervisely.app.fastapi import Jinja2Templates
 # import card_github
 router = APIRouter()
 
+
 _vscode = "vscode"
 _agent_name = os.environ["AGENT_NAME"]
 _agent_path = os.environ["SUPERVISELY_AGENT_FILES"]
@@ -16,6 +17,14 @@ _haikunator = Haikunator()
 _default_name = "my-app-"
 
 done1 = sly.app.widgets.DoneLabel("New application is defined")
+
+# print(Path(__file__))
+# print(Path(__file__).stem)
+# print(Path(__file__).absolute())
+# print(Path(__file__).parent.absolute())
+
+# templates = Jinja2Templates()
+# templates.context_widgets["card_01_name"] = self
 
 
 def init():

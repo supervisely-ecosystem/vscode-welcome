@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from fastapi import FastAPI, Request, Depends
 import supervisely as sly
 
+
 src_dir = str(Path(__file__).parent.absolute())
 app_dir = str(Path(src_dir).parent)
 sys.path.extend([src_dir, app_dir])
