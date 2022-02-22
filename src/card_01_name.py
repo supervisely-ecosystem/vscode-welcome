@@ -50,6 +50,7 @@ def update_paths():
 async def generate(
     request: Request, state: StateJson = Depends(StateJson.from_request)
 ):
+    raise ValueError(123)
     data = DataJson()
     state["name"] = generate_project_name()
     update_paths()

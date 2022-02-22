@@ -41,8 +41,19 @@ async def read_index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 
+from fastapi import FastAPI, HTTPException
+from fastapi.exception_handlers import http_exception_handler
+
+
+@app.exception_handler(500)
+async def server_exception_handler(request, exc):
+    return await http_exception_handler(
+        request, HTTPException(status_code=500, detail=repr(exc))
+    )
+
+
 # @TODO: remove restart dialog from SDK
-# @TODO: handle errors with readble dialog window - stack trace to html
+# @TODO: handle errors with readble dialog window - stack trace to html (discuss with den)
 # @TODO: restart dialog how to call routes functions from various files
 # @TODO: widgets storage? - separate file???
 # @TODO: handle github token errors
