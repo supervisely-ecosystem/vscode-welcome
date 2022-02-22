@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from fastapi import FastAPI, Request, Depends
 import supervisely as sly
 
-
+# @TODO: move to agent
 src_dir = str(Path(__file__).parent.absolute())
 root_dir = str(Path(src_dir).parent)
 sys.path.extend([src_dir, root_dir])
@@ -25,7 +25,7 @@ data = sly.app.DataJson()
 state["step"] = 1
 
 # @TODO: rename _haikunator remove all leading _
-import card_01_name
+import src.card_01_name
 import card_02_example
 import card_03_github
 
