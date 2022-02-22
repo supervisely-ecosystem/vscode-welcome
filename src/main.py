@@ -17,9 +17,7 @@ load_dotenv(os.path.join(app_dir, "debug.env"))
 
 
 app = FastAPI()
-sly.app.fastapi.enable_hot_reload_on_debug(app)
-app.mount("/sly", sly.app.fastapi.create())
-
+sly.app.fastapi.init(app)
 
 state = sly.app.StateJson()
 data = sly.app.DataJson()
@@ -32,24 +30,10 @@ import card_03_github
 app.include_router(card_01_name.router)
 
 
-restart = sly.app.widgets.RestartStep(steps=[])
-
-
 @app.get("/")
 async def read_index(request: Request):
     templates = sly.app.fastapi.Jinja2Templates(directory="templates")
     return templates.TemplateResponse("index.html", {"request": request})
-
-
-from fastapi import FastAPI, HTTPException
-from fastapi.exception_handlers import http_exception_handler
-
-
-@app.exception_handler(500)
-async def server_exception_handler(request, exc):
-    return await http_exception_handler(
-        request, HTTPException(status_code=500, detail=repr(exc))
-    )
 
 
 # @TODO: remove restart dialog from SDK
