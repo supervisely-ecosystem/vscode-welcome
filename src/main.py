@@ -18,15 +18,15 @@ state["step"] = 1
 
 # @TODO: rename _haikunator remove all leading _
 import src.card_01_name as card_01_name
-import card_02_example
-import card_03_github
+import src.card_02_example as card_02_example
+import src.card_03_github as card_03_github
 
 app.include_router(card_01_name.router)
 
 
 @app.get("/")
 async def read_index(request: Request):
-    templates = sly.app.fastapi.Jinja2Templates(directory=root_dir)
+    templates = sly.app.fastapi.Jinja2Templates(directory=os.getcwd())
     return templates.TemplateResponse("templates/index.html", {"request": request})
 
 
