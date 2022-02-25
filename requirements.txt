@@ -4,9 +4,10 @@ websockets==10.1
 jinja2==3.0.3
 psutil==5.9.0
 python-dotenv==0.19.2
-supervisely==6.7.5
 jsonpatch==1.32
-black==22.1.0
-haikunator==2.1.0
 MarkupSafe==2.0.1
 arel==0.2.0
+supervisely==6.7.5
+black==22.1.0
+haikunator==2.1.0
+

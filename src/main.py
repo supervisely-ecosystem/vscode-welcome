@@ -1,20 +1,12 @@
-from dataclasses import dataclass
 import os
-import sys
-from pathlib import Path
 from dotenv import load_dotenv
-from fastapi import FastAPI, Request, Depends
+from fastapi import FastAPI, Request
 import supervisely as sly
 
-# @TODO: move to agent
-src_dir = str(Path(__file__).parent.absolute())
-root_dir = str(Path(src_dir).parent)
-sys.path.extend([src_dir, root_dir])
-print(f"PYTHON_PATH updated: {[src_dir, root_dir]}")
 
 # order matters (used for debug)
-load_dotenv(os.path.join(root_dir, "secret.env"))
-load_dotenv(os.path.join(root_dir, "debug.env"))
+load_dotenv(os.path.join(os.getcwd(), "secret.env"))
+load_dotenv(os.path.join(os.getcwd(), "debug.env"))
 
 
 app = FastAPI()
@@ -37,6 +29,14 @@ async def read_index(request: Request):
     templates = sly.app.fastapi.Jinja2Templates(directory=root_dir)
     return templates.TemplateResponse("templates/index.html", {"request": request})
 
+
+# test-app
+# - raise error
+# - session info
+# - state mod
+# - data mod
+# - save to file state / data
+# - projects list
 
 # @TODO: restart dialog how to call routes functions from various files
 # @TODO: widgets storage? - separate file???
