@@ -10,12 +10,12 @@ from supervisely.app.fastapi import Jinja2Templates
 router = APIRouter()
 
 
-_vscode = "vscode"
-_agent_name = os.environ["AGENT_NAME"]
-_agent_path = os.environ["SUPERVISELY_AGENT_FILES"]
+vscode = "vscode"
+agent_name = os.environ["AGENT_NAME"]
+agent_path = os.environ["SUPERVISELY_AGENT_FILES"]
 
-_haikunator = Haikunator()
-_default_name = "my-app-"
+haikunator = Haikunator()
+default_name = "my-app-"
 
 done1 = sly.app.widgets.DoneLabel("New application is defined")
 
@@ -35,15 +35,15 @@ def init():
 
 
 def generate_local_path(name):
-    return os.path.join(_agent_path, _vscode, name)
+    return os.path.join(agent_path, vscode, name)
 
 
 def generate_team_files_path(name):
-    return os.path.join("/", _agent_name, _vscode, name)
+    return os.path.join("/", agent_name, vscode, name)
 
 
 def generate_project_name():
-    return _default_name + _haikunator.haikunate(token_length=0)
+    return default_name + haikunator.haikunate(token_length=0)
 
 
 def update_paths():

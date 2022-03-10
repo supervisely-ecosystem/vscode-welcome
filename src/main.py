@@ -16,7 +16,6 @@ state = sly.app.StateJson()
 data = sly.app.DataJson()
 state["step"] = 1
 
-# @TODO: rename _haikunator remove all leading _
 import src.card_01_name as card_01_name
 import src.card_02_example as card_02_example
 import src.card_03_github as card_03_github
