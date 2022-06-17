@@ -44,10 +44,18 @@ templates = sly.app.fastapi.Jinja2Templates(directory="templates")
 
 @app.get("/")
 async def read_index(request: Request):
-    return templates.TemplateResponse(
+    template = templates.TemplateResponse(
         "index.html",
         {
             "request": request,
             **card_app_template.get_jinja2_context(),
         },
     )
+
+    # output_from_parsed_template = template.render()
+    # print(output_from_parsed_template)
+
+    # # to save the results
+    # with open("my_new_file.html", "w") as fh:
+    #     fh.write(output_from_parsed_template)
+    return template
