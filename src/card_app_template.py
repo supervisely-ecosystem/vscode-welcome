@@ -1,16 +1,15 @@
 import supervisely as sly
 
 templates_table = sly.app.widgets.RadioTable(
-    state_field="selectedDemo",
-    data_field="demos",
-    radio_key="name",
     columns=["name", "github", "column #3"],
-    rows=[
-        {"Hello <user>!", "gh1", "-"},
-        {"Random point", "gh2", "-"},
-    ],
+    rows=[],
     subtitles={"name": "subname"},
 )
+
+# rows=[
+#         {"Hello <user>!", "gh1", "-"},
+#         {"Random point", "gh2", "-"},
+#     ],
 
 
 def get_jinja2_context():
