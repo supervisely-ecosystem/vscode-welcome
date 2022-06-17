@@ -18,31 +18,6 @@
             ],
             "jinja": true,
             "justMyCode": true,
-        },
-        {
-            "name": "gunicorn",
-            "type": "python",
-            "request": "launch",
-            "module": "gunicorn",
-            "args": [
-                "src.main:app",
-                "--bind",
-                "0.0.0.0:8001",
-                "--reload",
-                "--worker-class",
-                "uvicorn.workers.UvicornWorker",
-                "--reload-extra-file",
-                "templates/index.html",
-                "--reload-extra-file",
-                "templates/app.html",
-                "--reload-extra-file",
-                "templates/card_general.html",
-                "--reload-extra-file",
-                "templates/card_app_template.html",
-                "--reload-extra-file",
-                "templates/github_integration.html"
-            ],
-            "jinja": true
         }
     ]
 }
