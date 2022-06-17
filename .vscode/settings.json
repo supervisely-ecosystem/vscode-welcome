@@ -1,5 +1,6 @@
 {
   "python.pythonPath": "venv/bin/python",
+  "python.defaultInterpreterPath": "venv/bin/python",
   "files.exclude": {
     "**/__pycache__": true,
     "venv": true
@@ -14,4 +15,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "python.formatting.provider": "black",
+  "env": {
+    "PYTHONPATH": "${workspaceFolder}:${PYTHONPATH}"
+  }
 }
