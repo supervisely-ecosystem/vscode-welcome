@@ -40,6 +40,7 @@ app.mount("/sly", sly_app)
 app.include_router(card_general.router)
 # app.mount("/static", StaticFiles(directory="static", html=True), name="static")
 templates = sly.app.fastapi.Jinja2Templates(directory="templates")
+sly.app.fastapi.enable_hot_reload_on_debug(app)
 
 
 @app.get("/")
@@ -58,4 +59,5 @@ async def read_index(request: Request):
     # # to save the results
     # with open("my_new_file.html", "w") as fh:
     #     fh.write(output_from_parsed_template)
+    content = template.render(template.context)
     return template
